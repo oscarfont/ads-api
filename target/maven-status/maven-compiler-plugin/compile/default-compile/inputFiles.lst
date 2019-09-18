@@ -6,3 +6,4 @@
 /home/ofont99/Escritorio/ads-api/src/main/java/com/idealista/infrastructure/persistence/InMemoryPersistence.java
 /home/ofont99/Escritorio/ads-api/src/main/java/com/idealista/infrastructure/api/AdsController.java
 /home/ofont99/Escritorio/ads-api/src/main/java/com/idealista/application/package-info.java
+/home/ofont99/Escritorio/ads-api/src/main/java/com/idealista/infrastructure/api/RepositoryService.java

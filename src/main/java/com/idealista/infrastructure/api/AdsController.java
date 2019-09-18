@@ -13,16 +13,13 @@ public class AdsController {
     @Autowired
     private RepositoryService repositoryService;
 
-    //TODO añade url del endpoint
     @GetMapping("/ads/quality")
     //public ResponseEntity<List<QualityAd>> qualityListing() {
     //    return ResponseEntity.notFound().build();
-    public String qualityListing(){
-        //TODO rellena el cuerpo del método
-        return "List of ads for the quality management\n";
+    public List<QualityAd> qualityListing(){
+        return repositoryService.getAllAds();
     }
 
-    //TODO añade url del endpoint
     @GetMapping("/ads/public")
     //public ResponseEntity<List<PublicAd>> publicListing() {
         //return ResponseEntity.notFound().build();
@@ -31,7 +28,6 @@ public class AdsController {
         return "List of public ads.\n";
     }
 
-    //TODO añade url del endpoint
     @GetMapping("/ads/score")
     //public ResponseEntity<Void> calculateScore() {
     // return ResponseEntity.notFound().build();
