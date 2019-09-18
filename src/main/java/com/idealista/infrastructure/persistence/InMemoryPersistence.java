@@ -36,4 +36,31 @@ public class InMemoryPersistence {
     }
 
     //TODO crea los métodos que necesites
+
+    // Pic methods
+    public List<PictureVO> findAllPictures(){return pictures;}
+    public PictureVO findPicById(int id){
+        for (PictureVO pic : pictures){
+            int picId = pic.getId();
+            if(picId == id){
+                return pic;
+            }
+        }
+
+        return null;
+    }
+    
+    // Ad methods
+    public List<AdVO> findAllAds(){return ads;}
+    public AdVO findAdById(int id){
+        for (AdVO ad : ads){
+            int adId = ad.getId();
+            if(adId == id){
+                return ad;
+            }
+        }
+
+        return null;
+    }
+
 }
