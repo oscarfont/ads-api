@@ -26,9 +26,7 @@ public class AdsController {
     }
 
     @GetMapping("/ads/public")
-    //public ResponseEntity<List<PublicAd>> publicListing() {
-        //return ResponseEntity.notFound().build();
-    public List<PublicAd> publicListing() {
+    public ResponseEntity<List<PublicAd>> publicListing() {
         List<PublicAd> ads = new ArrayList<>();
         // sort quality ads descending
         List<QualityAd> qualityAds = repositoryService.getAllAds();
@@ -39,7 +37,7 @@ public class AdsController {
             if(isRelevant(ad))
                 ads.add(repositoryService.QualityAdToPublicAd(ad));            
         }
-        return ads;
+        return new ResponseEntity<>(ads, HttpStatus.OK);
     }
 
     private boolean isRelevant(QualityAd ad){
