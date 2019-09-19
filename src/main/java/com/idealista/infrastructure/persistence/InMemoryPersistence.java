@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Repository
 public class InMemoryPersistence {
@@ -35,11 +36,9 @@ public class InMemoryPersistence {
         pictures.add(new PictureVO(8, "http://www.idealista.com/pictures/8", "HD"));
     }
 
-    //TODO crea los métodos que necesites
-
     // Pic methods
     public List<PictureVO> findAllPictures(){return pictures;}
-    public PictureVO findPicById(int id){
+    public PictureVO findPicById(int id) throws NoSuchElementException{
         for (PictureVO pic : pictures){
             int picId = pic.getId();
             if(picId == id){
@@ -47,7 +46,7 @@ public class InMemoryPersistence {
             }
         }
 
-        return null;
+        throw new NoSuchElementException();
     }
     public PictureVO findPicByUrl(String url){
         for (PictureVO pic : pictures){
@@ -57,7 +56,7 @@ public class InMemoryPersistence {
             }
         }
 
-        return null;
+        throw new NoSuchElementException();
     }
     
     // Ad methods
@@ -70,7 +69,7 @@ public class InMemoryPersistence {
             }
         }
 
-        return null;
+        throw new NoSuchElementException();
     }
     public void updateAd(AdVO updatedAd){ 
         AdVO oldAd = findAdById(updatedAd.getId());

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.idealista.infrastructure.persistence.*;
 import org.springframework.stereotype.Service;
+import java.util.NoSuchElementException;
 
 @Service
 public class RepositoryService {
@@ -35,13 +36,13 @@ public class RepositoryService {
 
         return qualityAds;
     }
-    public QualityAd getAdById(int id){
+    public QualityAd getAdById(int id) throws NoSuchElementException{
         for(QualityAd ad : qualityAds){
             if(id == ad.getId()){
                 return ad;
             }
         }
-        return null;
+        throw new NoSuchElementException();
     }
     public void updateAd(QualityAd updatedAd){
         QualityAd oldAd = getAdById(updatedAd.getId());
