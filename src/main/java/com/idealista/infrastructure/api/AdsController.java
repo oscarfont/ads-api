@@ -1,5 +1,6 @@
 package com.idealista.infrastructure.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ public class AdsController {
     @GetMapping("/ads/public")
     //public ResponseEntity<List<PublicAd>> publicListing() {
         //return ResponseEntity.notFound().build();
-    public String publicListing() {
-        //TODO rellena el cuerpo del método
-        return "List of public ads.\n";
+    public List<PublicAd> publicListing() {
+        List<PublicAd> ads = new ArrayList<>();
+        for (QualityAd ad : repositoryService.getAllAds()){
+            ads.add(repositoryService.QualityAdToPublicAd(ad));            
+        }
+        return ads;
     }
 
     @GetMapping("/ads/score")

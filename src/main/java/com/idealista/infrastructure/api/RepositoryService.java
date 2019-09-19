@@ -69,4 +69,18 @@ public class RepositoryService {
         return outAd;
     }
 
+    public PublicAd QualityAdToPublicAd(QualityAd ad){
+        PublicAd outAd = new PublicAd();
+        // set properties
+        outAd.setId(ad.getId());
+        outAd.setTypology(ad.getTypology());
+        outAd.setDescription(ad.getDescription());
+        outAd.setTypology(ad.getTypology());
+        outAd.setPictureUrls(ad.getPictureUrls());
+        outAd.setHouseSize(ad.getHouseSize());
+        outAd.setGardenSize(ad.getGardenSize());
+
+        return outAd;
+    }
+
 }
