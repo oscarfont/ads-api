@@ -40,6 +40,7 @@ public class AdsController {
         return new ResponseEntity<>(ads, HttpStatus.OK);
     }
 
+    // method to tell if an ad is relevant or not
     private boolean isRelevant(QualityAd ad){
         if(ad.getScore() != null){
             int score = ad.getScore();
@@ -83,7 +84,7 @@ public class AdsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // method to compute score of the pics that an ad has
+    // method to compute the pics scores of an ad
     private Integer picsScore(QualityAd ad){
         List<String> urls = ad.getPictureUrls();
         // The ad has no pictures
@@ -105,10 +106,12 @@ public class AdsController {
         return score;
     }
 
+    // method to count words of a string
     private int countWords(String str) {
         return str.split("\\P{L}+").length;
     }
 
+    // method to tell if a list of string contains a string case insensitive
     private boolean containsCaseInsensitive(String s, List<String> l){
         for (String string : l){
             if (string.equalsIgnoreCase(s)){
@@ -118,6 +121,7 @@ public class AdsController {
         return false;
     }
 
+    // method to compute the scores that the description gives to an ad
     private Integer descriptionScore(QualityAd ad){
         // The ad does not have a description
         if(ad.getDescription() == null || ad.getDescription().isEmpty()){
@@ -165,6 +169,7 @@ public class AdsController {
         return score;
     }
 
+    // method to return the corresponding score to a complete ad
     private Integer completionScore(QualityAd ad){
 
         List<String> picsUrls = ad.getPictureUrls();
