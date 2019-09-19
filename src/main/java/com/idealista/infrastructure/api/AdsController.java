@@ -52,9 +52,7 @@ public class AdsController {
     }
 
     @GetMapping("/ads/score")
-    //public ResponseEntity<Void> calculateScore() {
-    // return ResponseEntity.notFound().build();
-    public void calculateScore() {
+    public ResponseEntity<Void> calculateScore() {
         int score = 0;
         for (QualityAd ad : repositoryService.getAllAds()){
             // compute score
@@ -82,7 +80,7 @@ public class AdsController {
             // restart score for the next ad
             score = 0;
         }
-
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // method to compute score of the pics that an ad has
