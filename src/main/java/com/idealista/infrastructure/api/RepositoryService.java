@@ -22,6 +22,7 @@ public class RepositoryService {
     // Picture Methods
     public List<PictureVO> getAllPictures(){return memoryPersistence.findAllPictures();}
     public PictureVO getPicById(int id){return memoryPersistence.findPicById(id);}
+    public PictureVO getPicByUrl(String url){return memoryPersistence.findPicByUrl(url);}
 
     // Ad Methods
     public List<QualityAd> getAllAds(){

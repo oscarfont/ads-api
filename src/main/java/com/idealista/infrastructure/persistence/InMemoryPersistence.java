@@ -49,6 +49,16 @@ public class InMemoryPersistence {
 
         return null;
     }
+    public PictureVO findPicByUrl(String url){
+        for (PictureVO pic : pictures){
+            String picUrl = pic.getUrl();
+            if(picUrl.equals(url)){
+                return pic;
+            }
+        }
+
+        return null;
+    }
     
     // Ad methods
     public List<AdVO> findAllAds(){return ads;}
