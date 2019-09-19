@@ -3,7 +3,7 @@ package com.idealista.infrastructure.api;
 import java.util.Date;
 import java.util.List;
 
-public class QualityAd {
+public class QualityAd implements Comparable<QualityAd>{
 
     private Integer id;
     private String typology;
@@ -76,5 +76,13 @@ public class QualityAd {
 
     public void setIrrelevantSince(Date irrelevantSince) {
         this.irrelevantSince = irrelevantSince;
+    }
+
+    @Override
+    public int compareTo(QualityAd ad) {
+        if (getScore() == null || ad.getScore() == null) {
+            return 0;
+        }
+        return getScore().compareTo(ad.getScore());
     }
 }

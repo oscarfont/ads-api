@@ -2,6 +2,7 @@ package com.idealista.infrastructure.api;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,12 @@ public class AdsController {
         //return ResponseEntity.notFound().build();
     public List<PublicAd> publicListing() {
         List<PublicAd> ads = new ArrayList<>();
-        for (QualityAd ad : repositoryService.getAllAds()){
+        // sort quality ads descending
+        List<QualityAd> qualityAds = repositoryService.getAllAds();
+        Collections.sort(qualityAds);
+        Collections.reverse(qualityAds);
+        // make them public
+        for (QualityAd ad : qualityAds){
             if(isRelevant(ad))
                 ads.add(repositoryService.QualityAdToPublicAd(ad));            
         }
