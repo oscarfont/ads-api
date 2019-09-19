@@ -43,6 +43,15 @@ public class RepositoryService {
         }
         return null;
     }
+    public void updateAd(QualityAd updatedAd){
+        QualityAd oldAd = getAdById(updatedAd.getId());
+        int index = qualityAds.indexOf(oldAd);
+        qualityAds.set(index, updatedAd);
+        // convert quality ad to advo
+        AdVO adVo = QualityAdToAdVO(updatedAd);
+        // update ad in DB
+        memoryPersistence.updateAd(adVo);
+    }
 
     // Other methods
     private QualityAd AdVoToQualityAd(AdVO ad){
@@ -66,6 +75,48 @@ public class RepositoryService {
         outAd.setPictureUrls(picsUrls);
         outAd.setHouseSize(ad.getHouseSize());
         outAd.setGardenSize(ad.getGardenSize());
+
+        if(ad.getScore() != null){
+            outAd.setScore(ad.getScore());
+        }
+
+        if(ad.getIrrelevantSince() != null){
+            outAd.setIrrelevantSince(ad.getIrrelevantSince());
+        }
+
+        return outAd;
+    }
+
+    private AdVO QualityAdToAdVO(QualityAd ad){
+
+        AdVO outAd = new AdVO();
+        // set properties
+        outAd.setId(ad.getId());
+        outAd.setTypology(ad.getTypology());
+        outAd.setDescription(ad.getDescription());
+        outAd.setTypology(ad.getTypology());
+        // set pic ids
+        List<String> urls = ad.getPictureUrls();
+        List<Integer> picsIds = new ArrayList<>();
+
+        for(String url : urls){
+            PictureVO pic = getPicByUrl(url);
+            picsIds.add(pic.getId());
+        }
+
+        // set pics
+        outAd.setPictures(picsIds);
+        outAd.setHouseSize(ad.getHouseSize());
+        outAd.setGardenSize(ad.getGardenSize());
+
+        // if there is score and irrelevant since
+        if(ad.getScore() != null){
+            outAd.setScore(ad.getScore());
+        }
+
+        if(ad.getIrrelevantSince() != null){
+            outAd.setIrrelevantSince(ad.getIrrelevantSince());
+        }
 
         return outAd;
     }

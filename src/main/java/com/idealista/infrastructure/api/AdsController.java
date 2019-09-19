@@ -31,9 +31,21 @@ public class AdsController {
     public List<PublicAd> publicListing() {
         List<PublicAd> ads = new ArrayList<>();
         for (QualityAd ad : repositoryService.getAllAds()){
-            ads.add(repositoryService.QualityAdToPublicAd(ad));            
+            if(isRelevant(ad))
+                ads.add(repositoryService.QualityAdToPublicAd(ad));            
         }
         return ads;
+    }
+
+    private boolean isRelevant(QualityAd ad){
+        if(ad.getScore() != null){
+            int score = ad.getScore();
+            if(score >= 40)
+                return true;
+            else
+                return false;
+        }
+        return false;
     }
 
     @GetMapping("/ads/score")
@@ -59,9 +71,13 @@ public class AdsController {
             if(score < 40){
                 // ad is irrelevant
                 ad.setIrrelevantSince(new Date());
-            }else{
-                // create public ad
             }
+
+            // update object in DB
+            repositoryService.updateAd(ad);
+
+            // restart score for the next ad
+            score = 0;
         }
 
     }

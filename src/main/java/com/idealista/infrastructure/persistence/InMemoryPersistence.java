@@ -72,5 +72,11 @@ public class InMemoryPersistence {
 
         return null;
     }
+    public void updateAd(AdVO updatedAd){ 
+        AdVO oldAd = findAdById(updatedAd.getId());
+        int index = ads.indexOf(oldAd);
+        // update object
+        ads.set(index, updatedAd);
+    }
 
 }
