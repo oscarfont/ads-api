@@ -9,6 +9,7 @@ import java.util.List;
 import com.idealista.infrastructure.persistence.PictureVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,10 +21,8 @@ public class AdsController {
     private RepositoryService repositoryService;
 
     @GetMapping("/ads/quality")
-    //public ResponseEntity<List<QualityAd>> qualityListing() {
-    //    return ResponseEntity.notFound().build();
-    public List<QualityAd> qualityListing(){
-        return repositoryService.getAllAds();
+    public ResponseEntity<List<QualityAd>> qualityListing(){
+        return new ResponseEntity<>(repositoryService.getAllAds(), HttpStatus.OK);
     }
 
     @GetMapping("/ads/public")
